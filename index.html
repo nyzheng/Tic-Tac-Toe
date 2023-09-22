@@ -62,6 +62,7 @@
                 position: fixed;
                 top: 0;
                 left: 0;
+                display: none;
             }
 
             .gameOver {
@@ -98,10 +99,22 @@
                 <div class="box" id="8"></div>
             </div>
 
-            <div class="over">
+            <div class="circleWin over">
                 <div class="gameOver">
-                    Game Over
-                    <button class="restartButton">Restart</button>
+                    圈圈勝利!
+                    <button class="restartButton" onclick="restartGame()">Restart</button>
+                </div>
+            </div>
+            <div class="crossWin over">
+                <div class="gameOver">
+                    叉叉勝利!
+                    <button class="restartButton" onclick="restartGame()">Restart</button>
+                </div>
+            </div>
+            <div class="draw over">
+                <div class="gameOver">
+                    平手!
+                    <button class="restartButton" onclick="restartGame()">Restart</button>
                 </div>
             </div>
         </div>
@@ -215,15 +228,15 @@
             //一旦檢測到result狀態改變
             function checkResult() {
                 if (gameData.result === true) {
-                    document.querySelector('.over').style.display = 'block'
+                    document.querySelector('.circleWin').style.display = 'block'
                     console.log('圈圈勝利')
                 }
                 if (gameData.result === false) {
-                    document.querySelector('.over').style.display = 'block'
+                    document.querySelector('.crossWin').style.display = 'block'
                     console.log('叉叉勝利')
                 }
                 if (gameData.result === 'draw') {
-                    document.querySelector('.over').style.display = 'block'
+                    document.querySelector('.draw').style.display = 'block'
                     console.log('平手')
                     return
                 }
@@ -249,11 +262,14 @@
                 }
                 gameData.isCircle = true
                 gameData.result = null
-                document.querySelector('.over').style.display = 'none'
+                let elOver = document.getElementsByClassName('over')
+                for (let i = 0; i < elOver.length; i++) {
+                    elOver[i].style.display = 'none'
+                }
             }
 
             // 監聽重新開始按鈕的點擊事件，呼叫 restartGame 函式
-            document.querySelector('.restartButton').addEventListener('click', restartGame)
+            // document.querySelector('.restartButton').addEventListener('click', restartGame)
 
             //監聽點擊空格
             gameData.map.addEventListener('click', (event) => {
