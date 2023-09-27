@@ -214,7 +214,7 @@
                     gameData.status[8] === false
                 ) {
                     gameData.result = false
-                } else if (gameData.status.every((item) => item !== null)) {
+                } else if (gameData.status.every((item) => item !== null) && !gameData.result) {
                     gameData.result = 'draw'
                 }
                 if (gameData.result === true) {
@@ -269,7 +269,6 @@
             }
 
             // 監聽重新開始按鈕的點擊事件，呼叫 restartGame 函式
-            // document.querySelector('.restartButton').addEventListener('click', restartGame)
 
             //監聽點擊空格
             gameData.map.addEventListener('click', (event) => {
